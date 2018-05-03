@@ -28,14 +28,24 @@ function CopyFn() {
   var copyText = document.getElementById("text");
   copyText.select();
   document.execCommand("Copy");
-  alert("Copied to Clipboard");
 }
 
 function OnReadyStateChangeFn() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myObj = JSON.parse(this.responseText);
-            var text = atou(myObj.text); 
-            document.getElementById("text").innerHTML = text;
-            }
+        if (this.readyState == 4) {
+          	if (this.status == 200) {
+                var myObj = JSON.parse(this.responseText);
+                var text = atou(myObj.text); 
+                document.getElementById("text").innerHTML = text;
+                }
+                else {
+                	var message = this.status + ' ' + this.statusText;
+                	var html = '<div>';
+                	html += '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+                	html += '<strong>Error</strong> ' + message;
+                	html += '</div>';        
+                	$('#req_error').html(html);
+                	$('#req_error').show();
+                }
+        }
 }
 
