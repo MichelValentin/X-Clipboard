@@ -25,10 +25,10 @@ function OnClickFn() {
 }
 
 function CopyFn() {
-  var copyText = document.getElementById("text");
-  copyText.select();
-  document.execCommand("Copy");
-}
+	  var copyText = document.getElementById("text");
+	  copyText.select();
+	  document.execCommand("Copy");
+	}
 
 function OnReadyStateChangeFn() {
         if (this.readyState == 4) {
@@ -36,7 +36,17 @@ function OnReadyStateChangeFn() {
                 var myObj = JSON.parse(this.responseText);
                 var text = atou(myObj.text); 
                 document.getElementById("text").innerHTML = text;
+                var re = /(https?\:\/\/(?:[\w]+\.)?[\w]+\.(?:\S+))/ig;
+                var result = "";
+                var tooltip = "";
+                while((result = re.exec(text)) != null) {
+                	tooltip = tooltip + '<p><a href="' + result[0] + '">' + result[0] + '</a></p>';
+                	}
+                if (tooltip.length > 0) {
+                	$('#urltxt').html('<br>' + tooltip);
+                	}
                 }
+          		
                 else {
                 	var message = this.status + ' ' + this.statusText;
                 	var html = '<div>';
