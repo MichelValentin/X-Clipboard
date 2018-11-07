@@ -39,12 +39,12 @@ function OnReadyStateChangeFn() {
             document.getElementById("text").innerHTML = text;
             var re = /(https?\:\/\/(?:[\w]+\.)?[\w]+\.(?:\S+))/ig;
             var result = "";
-            var tooltip = "";
+            var urllist = "";
             while((result = re.exec(text)) != null) {
-            	tooltip = tooltip + '<a href="' + result[0] + '" class="list-group-item">' + result[0] + '</a>';
+            	urllist = urllist + '<a href="' + result[0] + '" class="list-group-item">' + result[0] + '</a>';
             	}
-            if (tooltip.length > 0) {
-            	$('#urltxt').html(tooltip);
+            if (urllist.length > 0) {
+            	$('#urltxt').html(urllist);
             	}
             }
             else {
