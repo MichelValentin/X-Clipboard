@@ -21,7 +21,8 @@ function OnClickFn() {
     text = utoa(text); 
     xmlhttp.open("POST", "clip.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("text=" + text);        
+    xmlhttp.send("text=" + text);     
+    $('#urltxt').html("");  
 }
 
 function CopyFn() {
@@ -40,10 +41,10 @@ function OnReadyStateChangeFn() {
                 var result = "";
                 var tooltip = "";
                 while((result = re.exec(text)) != null) {
-                	tooltip = tooltip + '<p><a href="' + result[0] + '">' + result[0] + '</a></p>';
+                	tooltip = tooltip + '<a href="' + result[0] + '" class="list-group-item">' + result[0] + '</a>';
                 	}
                 if (tooltip.length > 0) {
-                	$('#urltxt').html('<br>' + tooltip);
+                	$('#urltxt').html(tooltip);
                 	}
                 }
           		
