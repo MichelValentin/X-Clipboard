@@ -1,5 +1,11 @@
 <?php
-define("FILENAME", "clip.txt");
+if (isset($_SERVER["PHP_AUTH_USER"])) {
+    define("FILENAME", "clip_" . $_SERVER["PHP_AUTH_USER"] . ".txt");
+}
+else {
+    define("FILENAME", "clip.txt");
+}
+
 
 if (file_exists(FILENAME) == FALSE) {
     $file = fopen(FILENAME,"w");
