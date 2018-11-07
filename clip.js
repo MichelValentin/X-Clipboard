@@ -22,41 +22,40 @@ function OnClickFn() {
     xmlhttp.open("POST", "clip.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("text=" + text);     
-    $('#urltxt').html("");  
 }
 
 function CopyFn() {
-	  var copyText = document.getElementById("text");
-	  copyText.select();
-	  document.execCommand("Copy");
-	}
+    var copyText = document.getElementById("text");
+    copyText.select();
+    document.execCommand("Copy");
+}
 
 function OnReadyStateChangeFn() {
-        if (this.readyState == 4) {
-          	if (this.status == 200) {
-                var myObj = JSON.parse(this.responseText);
-                var text = atou(myObj.text); 
-                document.getElementById("text").innerHTML = text;
-                var re = /(https?\:\/\/(?:[\w]+\.)?[\w]+\.(?:\S+))/ig;
-                var result = "";
-                var tooltip = "";
-                while((result = re.exec(text)) != null) {
-                	tooltip = tooltip + '<a href="' + result[0] + '" class="list-group-item">' + result[0] + '</a>';
-                	}
-                if (tooltip.length > 0) {
-                	$('#urltxt').html(tooltip);
-                	}
-                }
-          		
-                else {
-                	var message = this.status + ' ' + this.statusText;
-                	var html = '<div>';
-                	html += '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
-                	html += '<strong>Error</strong> ' + message;
-                	html += '</div>';        
-                	$('#req_error').html(html);
-                	$('#req_error').show();
-                }
-        }
+    if (this.readyState == 4) {
+        $('#urltxt').html("");  
+      	if (this.status == 200) {
+            var myObj = JSON.parse(this.responseText);
+            var text = atou(myObj.text); 
+            document.getElementById("text").innerHTML = text;
+            var re = /(https?\:\/\/(?:[\w]+\.)?[\w]+\.(?:\S+))/ig;
+            var result = "";
+            var tooltip = "";
+            while((result = re.exec(text)) != null) {
+            	tooltip = tooltip + '<a href="' + result[0] + '" class="list-group-item">' + result[0] + '</a>';
+            	}
+            if (tooltip.length > 0) {
+            	$('#urltxt').html(tooltip);
+            	}
+            }
+            else {
+            	var message = this.status + ' ' + this.statusText;
+            	var html = '<div>';
+            	html += '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+            	html += '<strong>Error</strong> ' + message;
+            	html += '</div>';        
+            	$('#req_error').html(html);
+            	$('#req_error').show();
+            }
+    }
 }
 
