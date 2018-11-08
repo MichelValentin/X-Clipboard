@@ -37,11 +37,11 @@ function OnReadyStateChangeFn() {
             var myObj = JSON.parse(this.responseText);
             var text = atou(myObj.text); 
             document.getElementById("text").innerHTML = text;
-            var re = /(https?\:\/\/(?:[\w]+\.)?[\w]+\.(?:\S+))/ig;
+            var re = /(\w+\:\/\/(?:[\w]+\.)?[\w]+\.(?:\S+))/ig;
             var result = "";
             var urllist = "";
             while((result = re.exec(text)) != null) {
-            	urllist = urllist + '<a href="' + result[0] + '" class="list-group-item">' + result[0] + '</a>';
+            	urllist = urllist + '<a href="' + result[0] + '" class="list-group-item" target="_blank">' + result[0] + '</a>';
             	}
             if (urllist.length > 0) {
             	$('#urltxt').html(urllist);
