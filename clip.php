@@ -6,7 +6,6 @@ else {
     define("FILENAME", "clip.txt");
 }
 
-
 if (file_exists(FILENAME) == FALSE) {
     $file = fopen(FILENAME,"w");
     fclose($file);
