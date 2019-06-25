@@ -42,20 +42,19 @@ function OnReadyStateChangeFn() {
             var urllist = "";
             while((result = re.exec(text)) != null) {
                 urllist = urllist + '<a href="' + result[0] + '" class="list-group-item" target="_blank">' + result[0] + '</a>';
-            	}
+            }
             if (urllist.length > 0) {
             	$('#urltxt').html(urllist);
-            	}
             }
-            else {
-            	var message = this.status + ' ' + this.statusText;
-            	var html = '<div>';
-            	html += '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
-            	html += '<strong>Error</strong> ' + message;
-            	html += '</div>';        
-            	$('#req_error').html(html);
-            	$('#req_error').show();
-            }
+        }
+        else {
+           	var message = this.status + ' ' + this.statusText;
+           	var html = '<div>';
+           	html += '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
+           	html += '<strong>Error</strong> ' + message;
+           	html += '</div>';        
+           	$('#req_error').html(html);
+           	$('#req_error').show();
+        }
     }
 }
-
